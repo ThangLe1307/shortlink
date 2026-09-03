@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: redirect-svc
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/shortlink}
+    username: ${DB_USER:redirect_ro}
+    password: ${DB_PASSWORD:redirect_ro}
+    hikari:
+      maximum-pool-size: 5
+      read-only: true
+
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
