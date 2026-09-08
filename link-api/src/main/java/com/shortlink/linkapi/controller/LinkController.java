@@ -1,7 +1,10 @@
 package com.shortlink.linkapi.controller;
 
 import com.shortlink.linkapi.dto.LinkRequest;
+import com.shortlink.linkapi.dto.LinkResponse;
 import com.shortlink.linkapi.repository.LinkRepository;
+import com.shortlink.linkapi.service.LinkService;
+import com.shortlink.linkapi.service.impl.LinkServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,11 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LinkController {
 
-  private final LinkRepository linkRepository;
+  private final LinkService linkService;
 
   @PostMapping("/links")
-  Object createLink(@RequestBody LinkRequest linkRequest) {
-
-    return null;
+  LinkResponse createLink(@RequestBody LinkRequest linkRequest) {
+    return linkService.createLink(linkRequest);
   }
 }
