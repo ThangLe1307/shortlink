@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: link-api
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/shortlink}
+    username: ${DB_USER:shortlink}
+    password: ${DB_PASSWORD:shortlink}
+    hikari:
+      maximum-pool-size: 20
+#  data:
+#    redis:
+#      host: ${REDIS_HOST:localhost}
+#      port: ${REDIS_PORT:6379}
+#      timeout: 200ms
+#      connect-timeout: 200ms
+#  jackson:
+#    default-property-inclusion: non_null
+#    deserialization:
+#      fail-on-unknown-properties: true
+
+shortlink:
+  short-base-url: ${SHORT_BASE_URL:http://localhost:8080}
+  bootstrap-token: ${BOOTSTRAP_TOKEN:}
+
+server:
+  port: 8081
+  shutdown: graceful
+#
+#management:
+#  server:
+#    port: ${MGMT_PORT:9091}
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,info,metrics,prometheus
+#  endpoint:
+#    health:
+#      probes:
+#        enabled: true
+#      group:
+#        readiness:
+#          include: db
+#  metrics:
+#    distribution:
+#      percentiles-histogram:
+#        http.server.requests: true

@@ -19,6 +19,7 @@
   <modules>
     <module>contracts</module>
     <module>redirect-svc</module>
+    <module>link-api</module>
   </modules>
 
   <properties>
