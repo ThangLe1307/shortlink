@@ -1,9 +1,10 @@
 package com.shortlink.linkapi.controller;
 
+import com.shortlink.linkapi.dto.LinkRequest;
 import com.shortlink.linkapi.repository.LinkRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,8 +13,9 @@ public class LinkController {
 
   private final LinkRepository linkRepository;
 
-  @GetMapping("/link/{id}")
-  Object getLinkById(@PathVariable Long id) {
-    return linkRepository.findById(id).orElse(null);
+  @PostMapping("/links")
+  Object createLink(@RequestBody LinkRequest linkRequest) {
+
+    return null;
   }
 }
