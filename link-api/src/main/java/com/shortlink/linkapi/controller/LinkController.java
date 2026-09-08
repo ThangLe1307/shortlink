@@ -2,9 +2,8 @@ package com.shortlink.linkapi.controller;
 
 import com.shortlink.linkapi.dto.LinkRequest;
 import com.shortlink.linkapi.dto.LinkResponse;
-import com.shortlink.linkapi.repository.LinkRepository;
 import com.shortlink.linkapi.service.LinkService;
-import com.shortlink.linkapi.service.impl.LinkServiceImpl;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +16,7 @@ public class LinkController {
   private final LinkService linkService;
 
   @PostMapping("/links")
-  LinkResponse createLink(@RequestBody LinkRequest linkRequest) {
+  LinkResponse createLink(@RequestBody @NotNull LinkRequest linkRequest) {
     return linkService.createLink(linkRequest);
   }
 }

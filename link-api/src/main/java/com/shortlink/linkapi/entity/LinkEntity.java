@@ -8,13 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 @Entity
 @Table(name = "links")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LinkEntity {
 
   @Id
