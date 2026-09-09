@@ -29,7 +29,6 @@ public class UserEntity {
   @Column(name = "email", nullable = false, unique = true)
   private String email;
 
-  /** sha256 hex lowercase của toàn bộ API key kể cả prefix. Không bao giờ lưu key thô. */
   @Column(name = "api_key_hash", nullable = false, unique = true, length = 64)
   private String apiKeyHash;
 

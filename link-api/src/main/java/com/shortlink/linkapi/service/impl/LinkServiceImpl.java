@@ -5,13 +5,12 @@ import com.shortlink.linkapi.dto.LinkResponse;
 import com.shortlink.linkapi.entity.LinkEntity;
 import com.shortlink.linkapi.repository.LinkRepository;
 import com.shortlink.linkapi.service.LinkService;
+import com.shortlink.linkapi.utils.AuthenticationUtils;
 import com.shortlink.linkapi.validation.LinkValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-
-import static com.shortlink.linkapi.constant.ReservedCode.RESERVED_CODE_LIST;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +26,7 @@ public class LinkServiceImpl implements LinkService {
 
         LinkEntity linkEntity = LinkEntity.builder()
                 .code(linkRequest.getCustomCode())
+                .userId(AuthenticationUtils.requiredCurrentUserId())
                 .createdAt(OffsetDateTime.now())
                 .expiresAt(linkRequest.getExpiresAt())
                 .targetUrl(linkRequest.getTargetUrl()).build();
