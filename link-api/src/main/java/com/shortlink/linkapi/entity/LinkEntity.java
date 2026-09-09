@@ -33,6 +33,10 @@ public class LinkEntity {
   private String targetUrl;
 
   @NotNull
+  @Column(name = "user_id", nullable = false, updatable = false)
+  private Long userId;
+
+  @NotNull
   @Column(name = "is_active", nullable = false)
   private Boolean isActive = true;
 
