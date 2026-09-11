@@ -21,7 +21,7 @@ import lombok.*;
 public class LinkEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
 
   @NotNull

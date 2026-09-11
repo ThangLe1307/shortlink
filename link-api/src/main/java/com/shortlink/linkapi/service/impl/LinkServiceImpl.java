@@ -1,5 +1,6 @@
 package com.shortlink.linkapi.service.impl;
 
+import com.shortlink.linkapi.component.CodeGenerator;
 import com.shortlink.linkapi.dto.LinkRequest;
 import com.shortlink.linkapi.dto.LinkResponse;
 import com.shortlink.linkapi.entity.LinkEntity;
@@ -18,17 +19,23 @@ public class LinkServiceImpl implements LinkService {
 
     private final LinkRepository linkRepository;
     private final LinkValidator linkValidator;
+    private final CodeGenerator codeGenerator;
 
     @Override
     public LinkResponse createLink(LinkRequest linkRequest) {
 
         linkValidator.validateRequest(linkRequest);
 
+        if (linkRequest.getCustomCode() == null) {
+            linkRequest.setCustomCode(codeGenerator.next());
+        }
+
         LinkEntity linkEntity = LinkEntity.builder()
                 .code(linkRequest.getCustomCode())
                 .userId(AuthenticationUtils.requiredCurrentUserId())
                 .createdAt(OffsetDateTime.now())
                 .expiresAt(linkRequest.getExpiresAt())
+                .isActive(true)
                 .targetUrl(linkRequest.getTargetUrl()).build();
 
          linkRepository.save(linkEntity);
@@ -37,9 +44,9 @@ public class LinkServiceImpl implements LinkService {
                 linkEntity.getCode(),
                 null,
                 linkEntity.getTargetUrl(),
-                null,
-                null,
-                null
+                true,
+                linkEntity.getCreatedAt(),
+                linkEntity.getExpiresAt()
         );
     }
 }
