@@ -1,4 +1,9 @@
 spring:
+  cache:
+    type: redis
+    redis:
+      time-to-live: 10m
+      cache-null-values: false
   application:
     name: link-api
   threads:
@@ -10,12 +15,12 @@ spring:
     password: ${DB_PASSWORD:shortlink}
     hikari:
       maximum-pool-size: 20
-#  data:
-#    redis:
-#      host: ${REDIS_HOST:localhost}
-#      port: ${REDIS_PORT:6379}
-#      timeout: 200ms
-#      connect-timeout: 200ms
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 200ms
+      connect-timeout: 200ms
 #  jackson:
 #    default-property-inclusion: non_null
 #    deserialization:
