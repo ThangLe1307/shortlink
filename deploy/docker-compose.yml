@@ -29,5 +29,41 @@ services:
       postgres:
         condition: service_healthy
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build:
+      context: ..
+      dockerfile: link-api/Dockerfile
+    image: link-api:1.0
+    container_name: link-api
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/shortlink
+      DB_USER: shortlink
+      DB_PASSWORD: shortlink
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SHORT_BASE_URL: http://localhost:8081
+      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=75.0"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+
 volumes:
   pgdata:
