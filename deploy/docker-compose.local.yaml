@@ -1,3 +1,6 @@
+#This docker-compose file is used for local development and testing only !
+#The application service depends on the database and cache services being healthy
+#before starting.
 services:
   postgres:
     image: postgres:16-alpine
